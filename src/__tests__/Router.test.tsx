@@ -12,6 +12,11 @@ test("app renders rooms and home and I can navigate to those pages", async () =>
   history.push("/rooms");
   await waitForElement(() => getByTestId("rooms-page"));
   expect(queryByTestId("home-page")).not.toBeInTheDocument();
+
+  history.push("/rooms/1");
+  await waitForElement(() => getByTestId("single-room-page"));
+  expect(queryByTestId("home-page")).not.toBeInTheDocument();
+  expect(queryByTestId("rooms-page")).not.toBeInTheDocument();
 });
 
 test("landing on a bad page shows home page", () => {

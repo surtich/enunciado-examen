@@ -9,7 +9,7 @@
     "@types/react-dom": "16.9.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1",
+    "react-scripts": "3.1.2",
     "typescript": "3.6.2"
   },
   "scripts": {
@@ -40,6 +40,7 @@
     "@testing-library/user-event": "^7.1.1",
     "@types/testing-library__dom": "^6.4.0",
     "@types/testing-library__react": "^9.1.1",
-    "@types/testing-library__user-event": "^4.1.1"
+    "@types/testing-library__user-event": "^4.1.1",
+    "node-sass": "^4.12.0"
   }
 }

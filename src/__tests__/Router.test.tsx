@@ -50,7 +50,7 @@ test("after click on logo navigate to home page", async () => {
 });
 
 test("open vs close navbar menu", async () => {
-  const { debug, getByTestId, queryByTestId } = renderRouter(<App />);
+  const { getByTestId } = renderRouter(<App />);
 
   const menu = getByTestId("menu");
   const navbarLinks = getByTestId("navbar-links");

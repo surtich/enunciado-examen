@@ -24,7 +24,8 @@ test("landing on a bad page shows home page", () => {
     initialEntries: ["/something-that-does-not-match"]
   });
 
-  const { queryByTestId } = renderRouter(<App />, { history });
+  const { getByTestId, queryByTestId } = renderRouter(<App />, { history });
   expect(queryByTestId("home-page")).not.toBeInTheDocument();
   expect(queryByTestId("rooms-page")).not.toBeInTheDocument();
+  expect(getByTestId("error-page")).toBeInTheDocument();
 });

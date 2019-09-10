@@ -17,6 +17,7 @@ test("app renders rooms and home and I can navigate to those pages", async () =>
   await waitForElement(() => getByTestId("single-room-page"));
   expect(queryByTestId("home-page")).not.toBeInTheDocument();
   expect(queryByTestId("rooms-page")).not.toBeInTheDocument();
+  expect(getByTestId("navbar")).toBeInTheDocument();
 });
 
 test("landing on a bad page shows home page", () => {
@@ -28,4 +29,5 @@ test("landing on a bad page shows home page", () => {
   expect(queryByTestId("home-page")).not.toBeInTheDocument();
   expect(queryByTestId("rooms-page")).not.toBeInTheDocument();
   expect(getByTestId("error-page")).toBeInTheDocument();
+  expect(getByTestId("navbar")).toBeInTheDocument();
 });

@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import { Service } from "../types/service";
 import ServiceComponent from "./Service";
+import Slider from "./Slider";
 import Title from "./Title";
+
+const getItems = (services: Service[]) =>
+  services.map(service => ({
+    id: service.id,
+    item: <ServiceComponent service={service} />
+  }));
 
 export default class Services extends Component<{
   services: Service[];
@@ -11,15 +18,7 @@ export default class Services extends Component<{
     return (
       <section className="services">
         <Title title="services" />
-        <div className="row">
-          <div className="services-center">
-            {services.map(service => (
-              <div className="col-1-of-4" key={`item-${service.id}`}>
-                <ServiceComponent service={service} />
-              </div>
-            ))}
-          </div>
-        </div>
+        <Slider size={4} items={getItems(services)} />
       </section>
     );
   }

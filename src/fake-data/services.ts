@@ -26,5 +26,26 @@ export default [
     title: "Strongest Beer",
     info:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, non?"
+  },
+  {
+    id: 5,
+    iconName: "FaTaxi",
+    title: "Airport transportation",
+    info:
+      "Lorem ipsum dolor sit amet consectetur adipisicing. Inventore, minima."
+  },
+  {
+    id: 6,
+    iconName: "FaUmbrellaBeach",
+    title: "Hammock Service",
+    info:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam, tempore?"
+  },
+  {
+    id: 7,
+    iconName: "FaWheelchair",
+    title: "Adapted accesses",
+    info:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam, tempore?"
   }
 ];

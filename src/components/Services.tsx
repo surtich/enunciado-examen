@@ -5,10 +5,7 @@ import Slider from "./Slider";
 import Title from "./Title";
 
 const getItems = (services: Service[]) =>
-  services.map(service => ({
-    id: service.id,
-    item: <ServiceComponent service={service} />
-  }));
+  services.map(service => <ServiceComponent service={service} />);
 
 export default class Services extends Component<{
   services: Service[];

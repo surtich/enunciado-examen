@@ -3,6 +3,8 @@ import userEvent from "@testing-library/user-event";
 import React from "react";
 import Slider from "../Slider";
 
+jest.useFakeTimers();
+
 const items = new Array(5)
   .fill(0)
   .map((_, i) => <div data-testid={`item-${i + 1}`}>Item {i + 1}</div>);
@@ -24,6 +26,7 @@ test("if slider move the items", async () => {
   );
 
   userEvent.click(right);
+  jest.runAllTimers();
   await wait(() =>
     expect(
       Array.prototype.map.call(

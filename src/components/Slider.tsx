@@ -72,7 +72,9 @@ export default class Slider extends Component<SliderProps, SliderState> {
               }, 500);
             }}
           >
-            <FaArrowLeft data-testid="slider-left" />
+            {items.length > size ? (
+              <FaArrowLeft data-testid="slider-left" />
+            ) : null}
           </span>
           <span
             className="slider-arrows-right"
@@ -88,7 +90,9 @@ export default class Slider extends Component<SliderProps, SliderState> {
               }, 500);
             }}
           >
-            <FaArrowRight data-testid="slider-right" />
+            {items.length > size ? (
+              <FaArrowRight data-testid="slider-right" />
+            ) : null}
           </span>
         </div>
         <div className="row">

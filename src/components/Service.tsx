@@ -9,4 +9,12 @@ const ServiceComponent = ({ service }: { service: Service }) => (
   </article>
 );
 
+export const ServicePlaceholder = () => (
+  <article className="service placeholder" data-testid="service-placeholder">
+    <span>&nbsp;</span>
+    <h6>&nbsp;</h6>
+    <p>&nbsp;</p>
+  </article>
+);
+
 export default ServiceComponent;

@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { Service } from "../types/service";
-import ServiceComponent from "./Service";
+import ServiceComponent, { ServicePlaceholder } from "./Service";
 import Slider from "./Slider";
 import Title from "./Title";
 
+const size = 4;
+
 const getItems = (services: Service[]) =>
-  services.map(service => <ServiceComponent service={service} />);
+  services.length
+    ? services.map(service => <ServiceComponent service={service} />)
+    : Array.from(new Array(size)).map(ServicePlaceholder);
 
 export default class Services extends Component<{
   services: Service[];
@@ -15,7 +19,7 @@ export default class Services extends Component<{
     return (
       <section className="services">
         <Title title="services" />
-        <Slider size={4} items={getItems(services)} />
+        <Slider size={size} items={getItems(services)} />
       </section>
     );
   }

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
-import FeaturedRooms from "../components/FeaturedRooms";
 import Hero from "../components/Hero";
+import FeaturedRooms from "../containers/FeaturedRooms";
 import Services from "../containers/Services";
 
 const Home = () => {

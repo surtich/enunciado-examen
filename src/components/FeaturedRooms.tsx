@@ -1,13 +1,17 @@
 import React, { Component } from "react";
-import { RoomContext, RoomProviderState } from "../context";
+import { Room as TRoom } from "../types/room";
 import Loading from "./Loading";
 import Room from "./Room";
 import Title from "./Title";
-export default class FeaturedRooms extends Component {
-  static contextType = RoomContext;
 
+type FeaturedRoomsProps = {
+  rooms: TRoom[];
+  loading: boolean;
+};
+
+export default class FeaturedRooms extends Component<FeaturedRoomsProps> {
   render() {
-    const { loading, featuredRooms: rooms } = this.context as RoomProviderState;
+    const { loading, rooms } = this.props;
 
     const Rooms = rooms.map(room => {
       return <Room key={room.id} room={room} />;

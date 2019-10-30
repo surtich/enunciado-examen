@@ -15,6 +15,7 @@ export type Room = {
 };
 
 export type RoomFilter = {
+  slug?: string;
   type?: string;
   capacity?: [number | undefined, (number | undefined)?];
   price?: [number | undefined, (number | undefined)?];

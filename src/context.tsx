@@ -12,7 +12,7 @@ export type GetRooms = (filter: RoomFilter) => Promise<Room[]>;
 
 export interface RoomContextProps {
   loading: boolean;
-  getRoom: (slug: string) => Room | undefined;
+  getRoom: (slug: string) => Promise<Room | undefined>;
   filterRooms: GetRooms;
   featuredRooms: Room[];
   rooms: Room[];
@@ -26,45 +26,50 @@ const InitialState: RoomProviderState = {
 
 const RoomContext = React.createContext<RoomContextProps>({
   loading: false,
-  getRoom: () => undefined,
+  getRoom: async () => undefined,
   filterRooms: () => Promise.resolve([]),
   featuredRooms: [],
-  rooms: [],
+  rooms: []
 });
 
 class RoomProvider extends Component<{}, RoomProviderState> {
   state = InitialState;
 
-  getRoom = (slug: string) => {
+  getRoom = async (slug: string) => {
     const room = this.state.rooms.find(room => room.slug === slug);
-    return room;
+    if (room) {
+      return room;
+    }
+    const rooms = await fetch<Room[]>(
+      `/rooms?filter=${JSON.stringify({ slug })}`
+    ).then(response => response.json());
+    return rooms[0];
   };
 
   getRooms = (filter: RoomFilter = {}) => {
     this.setState({
       loading: true
-    })
-    return fetch<Room[]>(`/rooms?filter=${JSON.stringify(filter)}`).then(
-      response => response.json()
-    ).then(rooms => {
-      this.setState({
-        loading: false
-      })
-      return rooms
     });
+    return fetch<Room[]>(`/rooms?filter=${JSON.stringify(filter)}`)
+      .then(response => response.json())
+      .then(rooms => {
+        this.setState({
+          loading: false
+        });
+        return rooms;
+      });
   };
 
   filterRooms = (filter: RoomFilter = {}) => {
     return this.getRooms(filter).then(rooms => {
       this.setState({
         rooms
-      })
+      });
       return rooms;
-    })
-  }
+    });
+  };
 
   componentDidMount() {
-
     this.getRooms({ featured: true }).then(rooms =>
       this.setState({
         featuredRooms: rooms
@@ -94,4 +99,3 @@ class RoomProvider extends Component<{}, RoomProviderState> {
 const RoomConsumer = RoomContext.Consumer;
 
 export { RoomProvider, RoomConsumer, RoomContext };
-

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 import Banner from "../components/Banner";
+import Loading from "../components/Loading";
 import StyledHero from "../components/StyledHero";
 import { RoomContext } from "../context";
 import defaultBcg from "../images/room-1.jpeg";
@@ -14,12 +15,20 @@ const SingleRoomPage: React.FC<SingleRoomPageProps> = ({
   }
 }) => {
   const [room, setRoom] = useState<Room | undefined>(undefined);
+  const [loading, setLoading] = useState(false);
 
   const { getRoom } = useContext(RoomContext);
 
   useEffect(() => {
-    getRoom(slug).then(room => setRoom(room));
+    setLoading(true);
+    getRoom(slug)
+      .then(room => setRoom(room))
+      .finally(() => setLoading(false));
   }, [slug, getRoom]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (!room) {
     return (
@@ -31,6 +40,7 @@ const SingleRoomPage: React.FC<SingleRoomPageProps> = ({
       </div>
     );
   }
+
   const {
     name,
     description,

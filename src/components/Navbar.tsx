@@ -1,12 +1,52 @@
 import React, { Component } from "react";
 import { FaAlignRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import logo from "../images/logo.svg";
+import Login from "./Login";
 
-export default class Navbar extends Component {
+type NavBarProps = RouteComponentProps;
+class Navbar extends Component<NavBarProps> {
+
+  unListen: null | Function = null;
+
   state = {
-    isOpen: false
+    isOpen: false,
+    username: "",
+    password: "",
+    isLogged: false
   };
+
+  componentDidMount() {
+    this.unListen = this.props.history.listen(() => {
+      this.setState({
+        isOpen: false
+      })
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.unListen) {
+      this.unListen();
+    }
+  }
+
+  setUsername = (username: string) => {
+    this.setState({ username, isLogged: false });
+  }
+
+  setPassword = (password: string) => {
+    this.setState({ password, isLogged: false });
+  }
+
+  doLogin = () => {
+    if (this.state.username === "pepe" && this.state.password === "12345")
+      this.setState({ isLogged: true });
+  }
+
+  doLogout = () => {
+    if (this.state.username === "pepe" && this.state.password === "12345")
+      this.setState({ isLogged: false, username: "", password: "" });
+  }
 
   handleToggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
@@ -33,6 +73,9 @@ export default class Navbar extends Component {
                 Rooms
               </Link>
             </li>
+            <li>
+              <Login username={this.state.username} password={this.state.password} setUsername={this.setUsername} setPassword={this.setPassword} doLogin={this.doLogin} doLogout={this.doLogout} isLogged={this.state.isLogged} />
+            </li>
           </ul>
         </div>
         <div className="nav__right">
@@ -49,3 +92,5 @@ export default class Navbar extends Component {
     );
   }
 }
+
+export default withRouter(Navbar);

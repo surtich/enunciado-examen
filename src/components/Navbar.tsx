@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { FaAlignRight } from "react-icons/fa";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { LoginContext } from "../context";
 import logo from "../images/logo.svg";
 import Login from "./Login";
 
 type NavBarProps = RouteComponentProps;
+
 class Navbar extends Component<NavBarProps> {
+
+  static contextType = LoginContext;
 
   unListen: null | Function = null;
 
@@ -13,7 +17,6 @@ class Navbar extends Component<NavBarProps> {
     isOpen: false,
     username: "",
     password: "",
-    isLogged: false
   };
 
   componentDidMount() {
@@ -38,21 +41,13 @@ class Navbar extends Component<NavBarProps> {
     this.setState({ password, isLogged: false });
   }
 
-  doLogin = () => {
-    if (this.state.username === "pepe" && this.state.password === "12345")
-      this.setState({ isLogged: true });
-  }
-
-  doLogout = () => {
-    if (this.state.username === "pepe" && this.state.password === "12345")
-      this.setState({ isLogged: false, username: "", password: "" });
-  }
-
   handleToggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
   render() {
+    const { isLogged, doLogin, doLogout } = this.context;
+
     return (
       <nav className="nav" data-testid="navbar">
         <div className="nav__left">
@@ -60,7 +55,7 @@ class Navbar extends Component<NavBarProps> {
             <img src={logo} alt="Beach Resort" />
           </Link>
           <ul
-            className={this.state.isOpen ? "nav__links-show" : "nav__links"}
+            className={this.state.isOpen ? (isLogged ? "nav__links-show nav__links-show-login" : "nav__links-show nav__links-show-no-login") : "nav__links"}
             data-testid="navbar-links"
           >
             <li>
@@ -73,8 +68,13 @@ class Navbar extends Component<NavBarProps> {
                 Rooms
               </Link>
             </li>
+            {isLogged ? <li>
+              <Link to="/admin">
+                Admin
+              </Link>
+            </li> : null}
             <li>
-              <Login username={this.state.username} password={this.state.password} setUsername={this.setUsername} setPassword={this.setPassword} doLogin={this.doLogin} doLogout={this.doLogout} isLogged={this.state.isLogged} />
+              <Login username={this.state.username} password={this.state.password} setUsername={this.setUsername} setPassword={this.setPassword} doLogin={doLogin} doLogout={doLogout} isLogged={isLogged} />
             </li>
           </ul>
         </div>

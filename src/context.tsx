@@ -1,6 +1,12 @@
 import React, { Component } from "react";
+import { rooms } from "./fake-data";
 import { Room, RoomFilter } from "./types/room";
-import fetch from "./utils/mockFetch";
+import allKeysFilter from "./utils/filter";
+
+export type LoginProviderState = {
+  isLogged: boolean;
+};
+
 
 export type RoomProviderState = {
   rooms: Room[];
@@ -16,58 +22,101 @@ export interface RoomContextProps {
   filterRooms: GetRooms;
   featuredRooms: Room[];
   rooms: Room[];
+  changeRoomName: (roomId: string, name: string) => void
 }
 
-const InitialState: RoomProviderState = {
-  rooms: [],
+export interface LoginContextProps {
+  isLogged: boolean;
+  doLogin: (username: string, password: string) => void;
+  doLogout: () => void;
+}
+
+const InitialLoginState: LoginProviderState = {
+  isLogged: false
+};
+
+
+const InitialRoomState: RoomProviderState = {
+  rooms,
   featuredRooms: [],
   loading: false
 };
+
+const LoginContext = React.createContext<LoginContextProps>({
+  isLogged: false,
+  doLogin: () => undefined,
+  doLogout: () => undefined,
+});
+
+class LoginProvider extends Component<{}, LoginProviderState> {
+  state = InitialLoginState;
+
+  doLogin = (username: string, password: string) => {
+    if (username === "pepe" && password === "12345") {
+      this.setState({ isLogged: true });
+    }
+  };
+
+  doLogout = () => {
+    this.setState({ isLogged: false });
+  };
+
+  render() {
+    const { isLogged } = this.state;
+
+    return (
+      <LoginContext.Provider
+        value={{
+          isLogged,
+          doLogin: this.doLogin,
+          doLogout: this.doLogout,
+        }}
+      >
+        {this.props.children}
+      </LoginContext.Provider>
+    );
+  }
+}
 
 const RoomContext = React.createContext<RoomContextProps>({
   loading: false,
   getRoom: async () => undefined,
   filterRooms: () => Promise.resolve([]),
+  changeRoomName: () => undefined,
   featuredRooms: [],
   rooms: []
 });
 
 class RoomProvider extends Component<{}, RoomProviderState> {
-  state = InitialState;
+  state = InitialRoomState;
 
   getRoom = async (slug: string) => {
     const room = this.state.rooms.find(room => room.slug === slug);
-    if (room) {
-      return room;
-    }
-    const rooms = await fetch<Room[]>(
-      `/rooms?filter=${JSON.stringify({ slug })}`
-    ).then(response => response.json());
-    return rooms[0];
+    return room;
   };
 
-  getRooms = (filter: RoomFilter = {}) => {
-    this.setState({
-      loading: true
-    });
-    return fetch<Room[]>(`/rooms?filter=${JSON.stringify(filter)}`)
-      .then(response => response.json())
-      .then(rooms => {
-        this.setState({
-          loading: false
-        });
-        return rooms;
-      });
+  getRooms = async (filter: RoomFilter = {}) => {
+    // @ts-ignore
+    return allKeysFilter(rooms, filter)
   };
 
   filterRooms = (filter: RoomFilter = {}) => {
-    return this.getRooms(filter).then(rooms => {
-      this.setState({
-        rooms
-      });
-      return rooms;
-    });
+    return this.getRooms(filter);
   };
+
+
+  changeRoomName = (roomId: string, name: string) => {
+    const rooms = this.state.rooms.map(room => {
+      if (room.id !== roomId) {
+        return room
+      }
+      return { ...room, name }
+    })
+    this.setState({
+      rooms
+    })
+  }
+
 
   componentDidMount() {
     this.getRooms({ featured: true }).then(rooms =>
@@ -87,6 +136,7 @@ class RoomProvider extends Component<{}, RoomProviderState> {
           getRoom: this.getRoom,
           filterRooms: this.filterRooms,
           featuredRooms,
+          changeRoomName: this.changeRoomName,
           rooms
         }}
       >
@@ -98,4 +148,7 @@ class RoomProvider extends Component<{}, RoomProviderState> {
 
 const RoomConsumer = RoomContext.Consumer;
 
-export { RoomProvider, RoomConsumer, RoomContext };
+const LoginConsumer = LoginContext.Consumer;
+
+export { RoomProvider, RoomConsumer, RoomContext, LoginProvider, LoginConsumer, LoginContext };
+

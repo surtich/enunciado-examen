@@ -5,7 +5,7 @@ type LoginProps = {
   isLogged: boolean;
   setUsername: (username: string) => void;
   setPassword: (password: string) => void;
-  doLogin: () => void;
+  doLogin: (username: string, password: string) => void;
   doLogout: () => void;
 }
 const Login = ({ username, password, isLogged, setUsername, setPassword, doLogin, doLogout }: LoginProps) => {
@@ -55,10 +55,7 @@ const Login = ({ username, password, isLogged, setUsername, setPassword, doLogin
   const login = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     event.preventDefault();
     event.stopPropagation();
-    setTimeout(() => {
-      hideLogin();
-      doLogin();
-    }, 200);
+    doLogin(username, password);
   }
 
   const logout = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {

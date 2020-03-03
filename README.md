@@ -1,6 +1,6 @@
-# Examen Segunda Evaluación
+# Examen Final
 
-# Día 25/02/2020 Tiempo: 5 horas
+# Día 05/03/2020 Tiempo: 5 horas
 
 - Nota: Cada pregunta se valorará como bien o como mal (valoraciones intermedias serán excepcionales).
 - Nota2: En cada pregunta se especifica si se valora en el examen de diseño o en el de desarrollo o en ambos.
@@ -61,56 +61,88 @@ Navegue a [http://localhost:3000](http://localhost:3000)
 
 ## EXAMEN
 
-El único ejercicio consiste en diseñar una página que permita cambiar el nombre de las habitaciones.
+#### 1.- Crear un slider de `Featured Rooms`.
 
-![Enunciado](./enunciado/examen.gif)
+![Enunciado](./enunciado/slider.gif)
 
-#### 1.- Admin.
+#### 1.1.- (1 punto diseño) Modifique el componente `FeaturedRooms` para que las habitaciones se muestren como se ve en las imágenes.
 
-#### 1.1.- (1 punto diseño) Añada una nueva opción al menú llamada `Admin`.
+Nota: Es decir, que el tamaño de las imágenes se adaptará a la pantalla.
 
 ![Image 1.1](./enunciado/image1.1.png)
+![Image 1.1bis](./enunciado/image1.1bis.png)
 
-#### 1.2.- (2 puntos desarrollo) La opción de menú `Admin`sólo será visible cuando el usuario esté "logeado".
+#### 1.2.- (1 punto diseño) La imagen central ocupará el doble que las demás.
 
-![Image 1.2](./enunciado/image1.2.gif)
+![Image 1.2](./enunciado/image1.2.png)
 
-#### 1.3.- (1 punto diseño) El alto del menú se adaptará al número de opciones mostrada (ver vídeo anterior).
+#### 1.3.- (1 punto diseño) Al situarse encima de una de las imágenes, ésta se hará más grande y las demás empequeñecerán.
 
-#### 1.4.- (1 punto diseño) Al pulsar sobre `Admin` se navegará a una nueva página.
+![Image 1.3](./enunciado/image1.3.gif)
+
+#### 1.4.- (1 punto diseño) La transición de tamaños será animada.
 
 ![Image 1.4](./enunciado/image1.4.gif)
 
-#### 1.5.- (1 punto desarrollo) Si intenta navegar a `Admin` sin estar `logeado` se mostrará un mensaje.
+#### 1.5.- (1 punto diseño) Todo lo anterior seguirá funcionando incluso si hay más habitaciones destacadas.
 
-![Image 1.5](./enunciado/image1.5.gif)
+![Image 1.5](./enunciado/image1.5.png)
 
-#### 1.6.- (3 puntos diseño) Al navegar a `Admin` se mostrarán las trece imágenes de las habitaciones con la disposición de la imagen.
+#### 1.6.- (3 puntos desarrollo) La transición de imágenes se hará automáticamente.
 
-Nota: Es obligatorio hacerlo con grid o con flex. Las imágenes se adaptarán al tamaño de la pantalla sin variar su posición.
+Nota: Se comprobará que se no se producen `memory leaks` y que se manejan los estados correctamente.
 
-![Image 1.6](./enunciado/image1.6.png)
+![Image 1.6](./enunciado/image1.6.gif)
 
-#### 1.7.- (1 punto desarrollo) Al pulsar sobre cada imagen se mostrará su nombre y (1 punto desarrollo) se ocultará el que se estuviera mostrando.
+#### 1.7.- (1 punto desarrollo) Cuando llegue a la última imagen volverá a empezar desde la primera imagen o mejor (1 punto adicional desarrollo) Cuando llegue a la última imagen volverá hacia atrás.
 
 ![Image 1.7](./enunciado/image1.7.gif)
 
-#### 1.8.- (2 puntos diseño) El estilo será el mostrado.
+#### 1.8.- (2 puntos desarrollo) Cuando se sitúe encima de una imagen, la transición automática se parará y esa imagen se hará más grande. Si no está encima de ninguna imagen volverá a comenzar la transición automática.
 
-![Image 1.8](./enunciado/image1.8.png)
+Nota: Puede que para que esto funcione tenga que hacer con JavaScript lo que seguramente hizo con CSS en el apartado 1.3
 
-#### 1.9.- (1 punto desarrollo) Se podrá editar el nombre de la imagen y (1 punto desarrollo) al volver a mostrar el nombre la habitación se mostrará el modificado.
+Nota2: Si puntúa en desarrollo con este apartado, no lo hará en diseño en el apartado 1.3. Por ello en el examen de diseño hay once puntos y no diez.
 
-#### 1.10.- (2 puntos diseño) El estilo no variará (es decir, no se verá que está en una caja de texto.
+Nota2: Los eventos de React para detectar que está encima de un componente o que dejar de estarlo son respectivamente `OnMouseOver` y `OnMouseOut`.
 
-![Image 1.9](./enunciado/image1.9.gif)
+![Image 1.8](./enunciado/image1.8.gif)
 
-#### 1.11.- (1 punto desarrollo) Al pulsar sobre "intro" o sobre "esc" se ocultará el nombre de la habitación y se almacenarán los cambios.
+2 .- Mejora de los estilos de `Admin`
 
-#### 1.12.- (2 puntos desarrollo) Los cambios en los nombres de las habitaciones se mantendrán entre vistas (/home, /rooms, /admin, ...).
+#### 2.1.- (1 punto diseño) El alto del `grid` se adaptará al tamaño de pantalla.
 
-Nota: Mire el vídeo inicial comprobará que los cambios hechos se mantienen entre todas las vistas.
-Nota2: Este ejercicio puede resultar difícil ya que probablemente requerirá una refactorización en el uso del contexto de habitaciones.
+![Image 2.1](./enunciado/image2.1.gif)
+
+#### 2.2.- (2 puntos diseño) Cuando las imágenes sean demasiado pequeñas, cambiará la forma de mostrarlas.
+
+![Image 2.2](./enunciado/image2.2.gif)
+
+#### 2.3.- (1 punto diseño) Organice mejor cómo se distribuye el espacio y el tamaño de las imágenes. Es decir, evite que queden espacios libres y cuide la separación entre imágenes.
+
+![Image 2.3](./enunciado/image2.3.png)
+
+#### 2.4.- (1 punto diseño) La última imagen ocupara todo el espacio sobrante.
+
+![Image 2.4](./enunciado/image2.4.png)
+
+3 .- Se podrá marcar una imagen cómo destacada
+
+#### 3.1.- (1 punto diseño) En `Admin` coloque una estrella en cada imagen.
+
+Nota: Las imágenes están en el directorio `src/images` y los ficheros se llaman `star.png` y `star_blank.png`.
+
+![Image 3.1](./enunciado/image3.1.png)
+
+#### 3.2.- (1 punto desarrollo) La estrella mostrada será distinta en función de si es `featured` o no.
+
+![Image 3.2](./enunciado/image3.2.png)
+
+#### 3.3.- (1 punto desarrollo) Al pulsar sobre una estrella, cambiará su estado.
+
+#### 3.4.- (1 punto desarrollo) Los cambios se mantendrán al navegar.
+
+![Image 3.4](./enunciado/image3.4.gif)
 
 ## Para entregar
 

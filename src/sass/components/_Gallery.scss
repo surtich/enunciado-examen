@@ -1,12 +1,15 @@
 .gallery {
+  height: 100vh;
   background-color: $off-white;
   grid-column: full-start / full-end;
 
   display: grid;
-  grid-template: repeat(7, 5vw) / repeat(8, 1fr);
+  grid-template: repeat(7, 1fr) / repeat(8, 1fr);
 
   grid-gap: 1.5rem;
   padding: 1.5rem;
+
+  
 
   &__title {
     grid-row: 1 / 2;
@@ -34,6 +37,7 @@
   &__item {
     display: grid;
     grid-template-columns: 1fr;
+    //grid-template-rows: 1fr;
     justify-content: center;
     &--1 {
       grid-row: 1 / span 2;
@@ -108,5 +112,20 @@
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &__item {
+      height: 250px;
+      flex-basis: 30%;
+      margin: 7px 10px;
+      flex-grow: 1;
+    }
   }
 }

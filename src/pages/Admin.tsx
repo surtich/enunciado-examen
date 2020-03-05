@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { LoginContext, RoomContext } from "../context";
+import star from "../images/star.png";
+import starB from "../images/star_blank.png";
 
 const Admin = () => {
   const { isLogged } = useContext(LoginContext);
-  const { rooms, changeRoomName } = useContext(RoomContext);
+  const { rooms, changeRoomName, changeFeatured } = useContext(RoomContext);
 
   const [selected, setSelected] = useState<string | null>(null);
   useEffect(() => {}, [rooms]);
-
   if (!isLogged) {
     /*return (
       <div>
@@ -41,6 +42,25 @@ const Admin = () => {
               value={room.name}
               style={{ opacity: selected === room.id ? 1 : 0 }}
             />
+            {room.featured ? (
+              <img
+                src={star}
+                className="gallery__star"
+                alt="star"
+                onClick={() => {
+                  changeFeatured(room.id, !room.featured);
+                }}
+              />
+            ) : (
+              <img
+                src={starB}
+                className="gallery__star"
+                alt="starB"
+                onClick={() => {
+                  changeFeatured(room.id, !room.featured);
+                }}
+              />
+            )}
             <img
               src={room.images[0]}
               alt="Gallery 1"

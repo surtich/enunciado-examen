@@ -7,7 +7,6 @@ export type LoginProviderState = {
   isLogged: boolean;
 };
 
-
 export type RoomProviderState = {
   rooms: Room[];
   featuredRooms: Room[];
@@ -22,7 +21,8 @@ export interface RoomContextProps {
   filterRooms: GetRooms;
   featuredRooms: Room[];
   rooms: Room[];
-  changeRoomName: (roomId: string, name: string) => void
+  changeRoomName: (roomId: string, name: string) => void;
+  changeFeatured: (roomId: string, featured: boolean) => void;
 }
 
 export interface LoginContextProps {
@@ -35,7 +35,6 @@ const InitialLoginState: LoginProviderState = {
   isLogged: false
 };
 
-
 const InitialRoomState: RoomProviderState = {
   rooms,
   featuredRooms: [],
@@ -45,7 +44,7 @@ const InitialRoomState: RoomProviderState = {
 const LoginContext = React.createContext<LoginContextProps>({
   isLogged: false,
   doLogin: () => undefined,
-  doLogout: () => undefined,
+  doLogout: () => undefined
 });
 
 class LoginProvider extends Component<{}, LoginProviderState> {
@@ -69,7 +68,7 @@ class LoginProvider extends Component<{}, LoginProviderState> {
         value={{
           isLogged,
           doLogin: this.doLogin,
-          doLogout: this.doLogout,
+          doLogout: this.doLogout
         }}
       >
         {this.props.children}
@@ -83,6 +82,7 @@ const RoomContext = React.createContext<RoomContextProps>({
   getRoom: async () => undefined,
   filterRooms: () => Promise.resolve([]),
   changeRoomName: () => undefined,
+  changeFeatured: () => undefined,
   featuredRooms: [],
   rooms: []
 });
@@ -97,26 +97,35 @@ class RoomProvider extends Component<{}, RoomProviderState> {
 
   getRooms = async (filter: RoomFilter = {}) => {
     // @ts-ignore
-    return allKeysFilter(rooms, filter)
+    return allKeysFilter(rooms, filter);
   };
 
   filterRooms = (filter: RoomFilter = {}) => {
     return this.getRooms(filter);
   };
 
-
   changeRoomName = (roomId: string, name: string) => {
     const rooms = this.state.rooms.map(room => {
       if (room.id !== roomId) {
-        return room
+        return room;
       }
-      return { ...room, name }
-    })
+      return { ...room, name };
+    });
     this.setState({
       rooms
-    })
-  }
-
+    });
+  };
+  changeFeatured = (roomId: string, featured: boolean) => {
+    const rooms = this.state.rooms.map(room => {
+      if (room.id !== roomId) {
+        return room;
+      }
+      return { ...room, featured };
+    });
+    this.setState({
+      rooms
+    });
+  };
 
   componentDidMount() {
     this.getRooms({ featured: true }).then(rooms =>
@@ -137,6 +146,7 @@ class RoomProvider extends Component<{}, RoomProviderState> {
           filterRooms: this.filterRooms,
           featuredRooms,
           changeRoomName: this.changeRoomName,
+          changeFeatured: this.changeFeatured,
           rooms
         }}
       >
@@ -150,5 +160,11 @@ const RoomConsumer = RoomContext.Consumer;
 
 const LoginConsumer = LoginContext.Consumer;
 
-export { RoomProvider, RoomConsumer, RoomContext, LoginProvider, LoginConsumer, LoginContext };
-
+export {
+  RoomProvider,
+  RoomConsumer,
+  RoomContext,
+  LoginProvider,
+  LoginConsumer,
+  LoginContext
+};

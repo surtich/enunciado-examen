@@ -7,7 +7,6 @@ export default class FeaturedRoomsComponent extends Component {
 
   render() {
     const { loading, featuredRooms } = this.context;
-
     return <FeaturedRooms loading={loading} rooms={featuredRooms} />;
   }
 }

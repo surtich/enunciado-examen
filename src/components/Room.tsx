@@ -4,7 +4,6 @@ import defaultImg from "../images/room-1.jpeg";
 import { Room } from "../types/room";
 const RoomComponent = memo(({ room }: { room: Room }) => {
   const { name, slug, images, price } = room;
-
   return (
     <article className="room" data-testid="room">
       <div className="room-img-container">

@@ -2,7 +2,6 @@
   box-shadow: $light-shadow;
   transition: $main-transition;
 
-
   &:hover {
     box-shadow: $dark-shadow;
   }
@@ -16,8 +15,16 @@
       transition: $main-transition;
     }
   }
+  &-img-containerf {
+    position: relative;
 
-
+    & img {
+      width: 100%;
+      display: block;
+      transition: $main-transition;
+      border: solid 1px black;
+    }
+  }
 
   &-price-top {
     position: absolute;
@@ -63,6 +70,21 @@
     transform: translate(-50%, -50%) scale(1);
   }
 
+  &-img-containerf:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  &-img-containerf:hover img {
+    opacity: 0.3;
+  }
+
+  &-img-containerf:hover &-price-top {
+    opacity: 0;
+  }
+
+  &-img-containerf:hover &-link {
+    transform: translate(-50%, -50%) scale(1);
+  }
   &-info {
     background: $dark-grey;
     text-transform: capitalize;

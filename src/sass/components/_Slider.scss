@@ -4,21 +4,21 @@
 
   &-transitioning-right {
     [class^="col-"] {
-      animation: slideRight .5s ease-out 0.2s;
+      animation: slideRight 0.5s ease-out 0.2s;
     }
 
     [class^="col-"]:first-child {
-      animation: slideRightFirst .5s ease-out 0.2s;
+      animation: slideRightFirst 0.5s ease-out 0.2s;
     }
   }
 
   &-transitioning-left {
     [class^="col-"] {
-      animation: slideLeft .5s ease-out 0.2s;
+      animation: slideLeft 0.5s ease-out 0.2s;
     }
 
     [class^="col-"]:last-child {
-      animation: slideLeftFirst .5s ease-out 0.2s;
+      animation: slideLeftFirst 0.5s ease-out 0.2s;
     }
   }
 
@@ -38,13 +38,11 @@
     margin-right: 0 !important;
   }
 
-
   &-center {
     width: 90vw;
     margin: 0 auto;
 
     @include clearfix;
-
   }
 
   &-arrows {

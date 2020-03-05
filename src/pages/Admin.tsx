@@ -3,7 +3,9 @@ import { LoginContext, RoomContext } from "../context";
 
 const Admin = () => {
   const { isLogged } = useContext(LoginContext);
-  const { rooms, changeRoomName } = useContext(RoomContext);
+  const { rooms, changeRoomName, changeFeaturedState } = useContext(
+    RoomContext
+  );
 
   const [selected, setSelected] = useState<string | null>(null);
   useEffect(() => {}, [rooms]);
@@ -18,6 +20,7 @@ const Admin = () => {
   return (
     <section className="gallery">
       {rooms.map((room, i) => {
+        const stared = room.featured;
         const className = `gallery__item gallery__item--${i + 1}`;
         return (
           <figure
@@ -41,11 +44,20 @@ const Admin = () => {
               value={room.name}
               style={{ opacity: selected === room.id ? 1 : 0 }}
             />
+
             <img
               src={room.images[0]}
               alt="Gallery 1"
               className="gallery__img"
             />
+            <div
+              className={`gallery__stared ${
+                stared ? "gallery__stared__a" : "gallery__stared__b"
+              }`}
+              onClick={() => {
+                changeFeaturedState(room.id, !stared);
+              }}
+            ></div>
           </figure>
         );
       })}

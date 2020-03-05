@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Room as TRoom } from "../types/room";
 import Loading from "./Loading";
 import Room from "./Room";
+import SliderFeatured from "./SliderFeatured";
 import Title from "./Title";
 
 type FeaturedRoomsProps = {
@@ -21,7 +22,7 @@ export default class FeaturedRooms extends Component<FeaturedRoomsProps> {
       <section className="featured-rooms">
         <Title title="featured rooms" />
         <div className="featured-rooms-center">
-          {loading ? <Loading /> : Rooms}
+          {loading ? <Loading /> : <SliderFeatured items={Rooms} />}
         </div>
       </section>
     );

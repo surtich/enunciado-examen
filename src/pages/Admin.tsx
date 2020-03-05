@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { LoginContext, RoomContext } from "../context";
+import star from "../images/star.png";
 
 const Admin = () => {
   const { isLogged } = useContext(LoginContext);
@@ -46,6 +47,7 @@ const Admin = () => {
               alt="Gallery 1"
               className="gallery__img"
             />
+            <img src={star} alt="star" className="star"/>
           </figure>
         );
       })}

@@ -12,11 +12,13 @@
   width: 90%;
   max-height: 200px;
   transition: all 2s;
-  //width: 100vh;
   
   & > .room {
-    //flex: 1 1 33%;
     width: 20%;
+
+    /* &:nth-child(2) {
+      flex-grow: 2;
+    } */
 
     & > .room-img-container {
       height: 80%;
@@ -33,9 +35,17 @@
   }
 
   & > .room:hover {
-    //color: red;
     flex-grow: 2;
+
+    /* & > :nth-child(2):not(:hover) {
+      flex-grow: 0;
+    } */
   }
+
+  /* & > :nth-child(2):not(:hover) {
+    flex-grow: 0;
+  } */
+  
 }
 
 @media screen and (max-width: 970px) {

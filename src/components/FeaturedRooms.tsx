@@ -11,9 +11,10 @@ type FeaturedRoomsProps = {
 
 export default class FeaturedRooms extends Component<FeaturedRoomsProps> {
   render() {
+    let cont = 0;
     const { loading, rooms } = this.props;
-
     const Rooms = rooms.map(room => {
+      cont = cont++;
       return <Room key={room.id} room={room} />;
     });
 

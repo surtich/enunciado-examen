@@ -1,6 +1,6 @@
-# Examen Segunda Evaluación
+# Examen Evaluación Extraordinaria
 
-# Día 25/02/2020 Tiempo: 5 horas
+# Día 15/06/2020 Tiempo: 3 horas
 
 - Nota: Cada pregunta se valorará como bien o como mal (valoraciones intermedias serán excepcionales).
 - Nota2: En cada pregunta se especifica si se valora en el examen de diseño o en el de desarrollo o en ambos.
@@ -57,60 +57,49 @@ git config user.email "Sustituya por su correo electrónico"
 
 Navegue a [http://localhost:3000](http://localhost:3000)
 
-- Dígale al profesor que ya ha terminado para que compruebe que todo es correcto y desconecte la red.
+- Dígale al profesor que ya ha terminado para que compruebe que todo es correcto.
 
 ## EXAMEN
 
-El único ejercicio consiste en diseñar una página que permita cambiar el nombre de las habitaciones.
+El único ejercicio consiste en diseñar una página que permita editar los datos de una habitación.
 
-![Enunciado](./enunciado/examen.gif)
+#### 1.- Botón de edición
 
-#### 1.- Admin.
+#### 1.1.- (1 punto desarrollo) En la página de Admin, al pulsar sobre una habitación se mostrará un botón que permitirá editar la habitación.
 
-#### 1.1.- (1 punto diseño) Añada una nueva opción al menú llamada `Admin`.
+#### 1.2.- (2 puntos desarrollo) Al pulsar sobre otra habitación el botón de la anterior se ocultará y se mostrará el botón de edición de la pulsada.
 
-![Image 1.1](./enunciado/image1.1.png)
+#### 1.3.- (2 puntos diseño) El botón se mostrará centrado con respecto a la imagen de la habitación y contendrá la imagen guardada en `src/images/edit.png`.
 
-#### 1.2.- (2 puntos desarrollo) La opción de menú `Admin`sólo será visible cuando el usuario esté "logeado".
+#### 2.- Navegación
 
-![Image 1.2](./enunciado/image1.2.gif)
+#### 2.1.- (1 punto desarrollo) Al pulsar sobre editar en una habitación concreta se navegará a una nueva página que tendrá esta URL `http://localhost:3000/rooms/id-habitacion-pulsada`.
 
-#### 1.3.- (1 punto diseño) El alto del menú se adaptará al número de opciones mostrada (ver vídeo anterior).
+#### 3.- Edición
 
-#### 1.4.- (1 punto diseño) Al pulsar sobre `Admin` se navegará a una nueva página.
+#### 3.1.- (1 punto desarrollo) Se cargarán los datos de la habitación pulsada.
 
-![Image 1.4](./enunciado/image1.4.gif)
+#### 3.2.- (5 puntos diseño) El estilo será similar al mostrado en rooms (`http://localhost:3000/rooms/single-standard`) pero con algunas diferencias:
 
-#### 1.5.- (1 punto desarrollo) Si intenta navegar a `Admin` sin estar `logeado` se mostrará un mensaje.
+* El nombre de la habitación será una caja de texto editable
+* Details será un textarea.
+* Price será una caja numérica.
+* Size será una caja numérica.
+* Max capacity: será un desplegable entre varias opciones.
+* Pets allowed será un checkbox.
+* Breakfast será un checkbox.
+* Featured será un checkbox.
+* Los extras se mostrarán en una lista pero no serán editables.
 
-![Image 1.5](./enunciado/image1.5.gif)
+Los componentes tendrán seleccionados los valores de la habitación en edición y estarán uniformemente distribuidos.
 
-#### 1.6.- (3 puntos diseño) Al navegar a `Admin` se mostrarán las trece imágenes de las habitaciones con la disposición de la imagen.
+#### 3.3.- (2 puntos desarrollo) Los cambios realizados en una habitación no se almacenarán directamente sino que, cuando haya un cambio, se mostrará un botón que permitirá guardar los cambios. Al aceptar los cambios, se usarán esos nuevos datos en el resto de la aplicación.
 
-Nota: Es obligatorio hacerlo con grid o con flex. Las imágenes se adaptarán al tamaño de la pantalla sin variar su posición.
+#### 3.4.- (2 puntos desarrollo) Habrá un botón que permitirá cancelar los cambios. En ese caso se volverán a mostrar los valores anteriores.
 
-![Image 1.6](./enunciado/image1.6.png)
+#### 3.5.- (1 punto desarrollo) Los botones aceptar y cancelar se mostrarán cuando haya cambios y se ocultarán cuando se pulse sobre uno de ellos.
 
-#### 1.7.- (1 punto desarrollo) Al pulsar sobre cada imagen se mostrará su nombre y (1 punto desarrollo) se ocultará el que se estuviera mostrando.
-
-![Image 1.7](./enunciado/image1.7.gif)
-
-#### 1.8.- (2 puntos diseño) El estilo será el mostrado.
-
-![Image 1.8](./enunciado/image1.8.png)
-
-#### 1.9.- (1 punto desarrollo) Se podrá editar el nombre de la imagen y (1 punto desarrollo) al volver a mostrar el nombre la habitación se mostrará el modificado.
-
-#### 1.10.- (2 puntos diseño) El estilo no variará (es decir, no se verá que está en una caja de texto.
-
-![Image 1.9](./enunciado/image1.9.gif)
-
-#### 1.11.- (1 punto desarrollo) Al pulsar sobre "intro" o sobre "esc" se ocultará el nombre de la habitación y se almacenarán los cambios.
-
-#### 1.12.- (2 puntos desarrollo) Los cambios en los nombres de las habitaciones se mantendrán entre vistas (/home, /rooms, /admin, ...).
-
-Nota: Mire el vídeo inicial comprobará que los cambios hechos se mantienen entre todas las vistas.
-Nota2: Este ejercicio puede resultar difícil ya que probablemente requerirá una refactorización en el uso del contexto de habitaciones.
+#### 3.6.- (3 puntos diseño) Los botones aceptar y cancelar estarán adecuadamente colocados y usarán las imágenes `src/images/ok.png` y `src/images/ko.png`.
 
 ## Para entregar
 
@@ -135,7 +124,7 @@ Nota2: Este ejercicio puede resultar difícil ya que probablemente requerirá un
 
 - Dígale al profesor que va a entregar el examen.
 
-- Conecte la red y ejecute el siguiente comando:
+- Ejecute el siguiente comando:
 
 ```bash
     git push origin <nombre-de-la-rama>
